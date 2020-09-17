@@ -105,6 +105,13 @@ nav a:hover {
 .game-container div {
   height: 20px;
   width: 20px;
+}
+
+.btn-container {
+  margin-top: 2rem;
+}
+
+.tetromino {
   background-color: blue;
 }
 
