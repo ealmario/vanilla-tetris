@@ -84,12 +84,81 @@ document.addEventListener('DOMContentLoaded', () => {
   // Make the tetromino move down every second
   let timerId = setInterval(moveDown, 1000);
 
+  // Assign functions to keyCodes
+  function control (e) {
+    if(e.keyCode === 37 ||  e.keyCode === 65) {
+      moveLeft();
+    } else if (e.keyCode === 74) {
+      // rotate left
+      rotateLeft();
+    } else if (e.keyCode === 76) {
+      // rotate right
+      rotateRight();
+    } else if (e.keyCode === 32 ) {
+      moveDown();
+    } else if (e.keyCode === 39 || e.keyCode === 68) {
+      moveRight()
+    }
+  }
+
+  document.addEventListener('keydown', control);
+
   // Move down function
   function moveDown() {
     undraw();
     currentPosition += width;
     draw();
     freeze();
+  }
+
+  // Move the tetromino left, unless it's at the edge or there's a blockage
+  function moveLeft() {
+    undraw();
+    const isAtLeftEdge = current.some( index => (currentPosition + index) % width === 0 );
+
+    if (!isAtLeftEdge) currentPosition -= 1;
+    if (current.some( index => squares[currentPosition + index].classList.contains('taken'))) {
+      currentPosition += 1;
+    }
+
+    draw();
+  }
+
+  // Move the tetromino right, unless it's at the edge or there's a blockage
+  function moveRight() {
+    undraw();
+    const isAtRightEdge = current.some( index => (currentPosition + index) % width === width - 1);
+
+    if (!isAtRightEdge) currentPosition += 1;
+
+    if (current.some( index => squares[currentPosition + index].classList.contains('taken'))) {
+      currentPosition -= 1;
+    }
+
+    draw();
+  }
+
+  // Rotate Right
+  function rotateRight() {
+    undraw();
+    currentRotation ++;
+    if (currentRotation === current.length) {
+      currentRotation = 0;
+    };
+    current = theTetrominoes[random][currentRotation];
+    draw();
+  }
+
+  // Rotate Left
+
+  function rotateLeft() {
+    undraw();
+    currentRotation --;
+    if (currentRotation === -1) {
+      currentRotation = current.length -1;
+    }
+    current = theTetrominoes[random][currentRotation];
+    draw();
   }
 
   // Freeze function
