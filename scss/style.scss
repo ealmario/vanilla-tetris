@@ -107,6 +107,11 @@ nav {
 }
 
 .game-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-container {
   background-color: #fcfcfc;
   display: flex;
   flex-wrap: wrap;
@@ -120,6 +125,20 @@ nav {
   }
 }
 
+.minigrid-container {
+  background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
+  width: 80px;
+  height: 80px;
+  margin-left: 2rem;
+
+  div {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .btn-container {
   margin-top: 2rem;
 }
@@ -128,6 +147,3 @@ nav {
   background-color: blue;
 }
 
-.taken {
-
-}

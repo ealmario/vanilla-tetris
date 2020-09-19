@@ -1,23 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const gameContainer = document.getElementById('game-container');
+  const gridContainer = document.getElementById('grid-container');
+  const miniGridContainer = document.getElementById('minigrid-container');
   const scoreDisplay = document.getElementById('score');
-  const startBtn = document.getElementById('start-btn')
+  const startBtn = document.getElementById('start-btn');
   const width = 10;
+  let timerId;
+  let nextRandom = 0;
 
   // Create grid divs
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 201; i++) {
     const square = document.createElement("div");
-    gameContainer.appendChild(square);
+    gridContainer.appendChild(square);
   }
 
   // Create taken divs 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 11; i++) {
     const takenSquare = document.createElement("div");
-    gameContainer.appendChild(takenSquare);
+    gridContainer.appendChild(takenSquare);
     takenSquare.className = "taken";
-  } 
-  // Get all the squares inside the game container
-  let squares = Array.from(document.querySelectorAll('.game-container div'));
+  }
+
+  // Create divs for mini-grid
+  for (let i = 0; i < 17; i++) {
+    const miniGridSquares = document.createElement("div");
+    miniGridContainer.appendChild(miniGridSquares);
+  }
+  
+  // Get all the squares inside the grid container
+  let squares = Array.from(document.querySelectorAll('.grid-container div'));
+
+  // Show up-next tetromino in mini-grid
+  const displaySquares = document.querySelectorAll('.minigrid-container div');
+  const displayWidth = 4;
+  let displayIndex = 0;
+
+  // Tetrominos without rotation
+  const upNextTetrominoes = [
+    [1, displayWidth+1, displayWidth*2+1, 2], // lTetromino
+    [0, displayWidth, displayWidth+1, displayWidth*2+1], // zTetromino
+    [1, displayWidth, displayWidth+1, displayWidth+2], // tTetromino
+    [0, 1, displayWidth, displayWidth+1] // oTetromino
+    [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] // iTetronimo
+  ]
 
   // Tetrominoes
   const lTetromino = [
@@ -58,9 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino];
 
   // Tetromino position
-  // let currentPosition = Math.floor(Math.random() * width);
   let currentPosition = 4;
-  // let currentRotation = Math.floor(Math.random() * 4);
   let currentRotation = 0;
   
   // Randomly pick a Tetrormino and its rotation
@@ -82,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Make the tetromino move down every second
-  let timerId = setInterval(moveDown, 1000);
+  timerId = setInterval(moveDown, 1000);
 
   // Assign functions to keyCodes
   function control (e) {
@@ -103,11 +125,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', control);
 
+  // Display the shape in the mini-grid display
+  function displayShape() {
+    // Remove class 'tetromino' from the mini-grid
+    displaySquares.forEach( square => {
+      square.classList.remove('tetromino');
+    });
+    upNextTetrominoes[nextRandom].forEach( index => {
+      displaySquares[displayIndex + index].classList.add('tetromino');
+    });
+  }
+
+  // Freeze function
+  function freeze() {
+    if (current.some( index => squares[currentPosition + index + width].classList.contains('taken')) ) {
+      current.forEach( index => squares[currentPosition + index].classList.add('taken'));
+
+      // Start a new tetromino falling
+      random = nextRandom;
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length);
+      current = theTetrominoes[random][currentRotation];
+      currentPosition = 4;
+      draw();
+      displayShape();
+    }
+  }
+
   // Move down function
   function moveDown() {
     undraw();
     currentPosition += width;
     draw();
+    displayShape();
     freeze();
   }
 
@@ -159,18 +208,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     current = theTetrominoes[random][currentRotation];
     draw();
-  }
-
-  // Freeze function
-  function freeze() {
-    if (current.some( index => squares[currentPosition + index + width].classList.contains('taken')) ) {
-      current.forEach( index => squares[currentPosition + index].classList.add('taken'));
-
-      // Start a new tetromino falling
-      random = Math.floor(Math.random() * theTetrominoes.length);
-      current = theTetrominoes[random][currentRotation];
-      currentPosition = 4;
-      draw();
-    }
   }
 });
