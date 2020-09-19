@@ -29,20 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Get all the squares inside the grid container
   let squares = Array.from(document.querySelectorAll('.grid-container div'));
 
-  // Show up-next tetromino in mini-grid
-  const displaySquares = document.querySelectorAll('.minigrid-container div');
-  const displayWidth = 4;
-  let displayIndex = 0;
-
-  // Tetrominos without rotation
-  const upNextTetrominoes = [
-    [1, displayWidth+1, displayWidth*2+1, 2], // lTetromino
-    [0, displayWidth, displayWidth+1, displayWidth*2+1], // zTetromino
-    [1, displayWidth, displayWidth+1, displayWidth+2], // tTetromino
-    [0, 1, displayWidth, displayWidth+1] // oTetromino
-    [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] // iTetronimo
-  ]
-
   // Tetrominoes
   const lTetromino = [
     [1, width+1, width*2+1, 2],
@@ -125,6 +111,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', control);
 
+  // Show up-next tetromino in mini-grid
+  const displaySquares = document.querySelectorAll('.minigrid-container div');
+  const displayWidth = 4;
+  let displayIndex = 0;
+
+  // Tetrominos without rotation
+  const upNextTetrominoes = [
+    [1, displayWidth+1, displayWidth*2+1, 2], // lTetromino
+    [0, displayWidth, displayWidth+1, displayWidth*2+1], // zTetromino
+    [1, displayWidth, displayWidth+1, displayWidth+2], // tTetromino
+    [0, 1, displayWidth, displayWidth+1] // oTetromino
+    [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] // iTetronimo
+  ]
+
   // Display the shape in the mini-grid display
   function displayShape() {
     // Remove class 'tetromino' from the mini-grid
@@ -199,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Rotate Left
-
   function rotateLeft() {
     undraw();
     currentRotation --;
