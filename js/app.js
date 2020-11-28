@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   for (let i = 0; i < 10; i++) {
     const takenSquare = document.createElement("div");
     gridContainer.appendChild(takenSquare);
-    takenSquare.className = "taken";
+    takenSquare.classList.add('taken', 'edge');
   }
 
   // Create divs for mini-grid

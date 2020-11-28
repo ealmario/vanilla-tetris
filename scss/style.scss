@@ -5,10 +5,14 @@
 }
 
 body {
+  background-image: linear-gradient(#000428, #004e92);
+  color: #fcfcfc;
   font-family: 'Poppins', sans-serif;
+  height: 100vh;
 }
 
 nav {
+  padding: 1rem 0;
   position: relative;
 
   h1{
@@ -20,23 +24,34 @@ nav {
     width: 25px;
 
     div {
-      background-color: #101010;
-      height: 3px;
+      background-color: #fcfcfc;
+      border-radius: 8px;
+      height: 2px;
       margin-bottom: 3px;
       transition: 300ms ease;
     }
   }
 
+  nav .container.relative {
+    position: relative;
+  }
+
   ul {
-    background-color: #fcfcfc;
+    background-color: rgba(0,0,0,0.8);
     list-style: none;
     padding: 1rem 0;
     position: absolute;
-    top: -100px;
+    top: -150px;
     height: 0;
     opacity: 0;
     width: 100%;
     transition: 300ms ease;
+
+    a {
+      color: #fcfcfc;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
     .container {
       display: flex;
@@ -74,14 +89,14 @@ nav {
   }
 
   .div3 {
-    transform: rotate(-45deg) translate(6.5px, -1px);
+    transform: rotate(-45deg) translate(4px, 0);
   }
 
   z-index: 5;
 }
 
 .active-dropdown {
-  top: 5px;
+  top: 40px;
   height: 10vh;
   margin-top: 1.5rem;
   opacity:  1;
@@ -96,7 +111,6 @@ nav {
 }
 
 .main-container {
-  background: yellow;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -108,30 +122,40 @@ nav {
 
 .game-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .grid-container {
   background-color: #fcfcfc;
+  border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   width: 200px;
   height: 400px;
 
   div {
+    border-radius: 3px;
     height: 20px;
     width: 20px;
-    // background-color: blue;
+  }
+
+  .edge {
+    opacity: 0;
   }
 }
 
 .minigrid-container {
-  background-color: gray;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   width: 80px;
   height: 80px;
-  margin-left: 2rem;
+  margin-top: 2rem;
+  margin-left: 0;
 
   div {
     width: 20px;
@@ -145,5 +169,26 @@ nav {
 
 .tetromino {
   background-color: blue;
+  border: 2px solid black;
+  border-radius: 3px;
 }
 
+@media screen and (min-width: 500px) {
+  .game-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .minigrid-container {
+    margin-top: 0;
+    margin-left: 2rem;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .container,
+  .main-container {
+    width: 960px;
+  }
+}
