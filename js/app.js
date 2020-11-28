@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let nextRandom = 0;
   let score = 0;
 
-
   // Create grid divs
   for (let i = 0; i < 200; i++) {
     const square = document.createElement("div");

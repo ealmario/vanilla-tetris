@@ -75,6 +75,33 @@ nav {
   }
 }
 
+footer {
+  margin: 5rem auto 0 auto;
+  padding: 1rem 2rem;
+  width: 100%;
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .text {
+    font-size: 0.625rem;
+    font-weight: 400;
+  }
+
+  .github-link {
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    color: #101010;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    text-decoration: none;
+  }
+}
+
 .active {
   div {
     margin: 0;
@@ -214,7 +241,8 @@ nav {
 
 @media screen and (min-width:1024px) {
   .container,
-  .main-container {
+  .main-container,
+  footer {
     width: 960px;
   }
 }

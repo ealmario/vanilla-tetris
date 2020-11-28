@@ -66,6 +66,30 @@ nav a:hover {
   text-decoration: none;
 }
 
+footer {
+  margin: 5rem auto 0 auto;
+  padding: 1rem 2rem;
+  width: 100%;
+}
+footer .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .text {
+  font-size: 0.625rem;
+  font-weight: 400;
+}
+footer .github-link {
+  background-color: #fcfcfc;
+  border-radius: 8px;
+  color: #101010;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
 .active {
   z-index: 5;
 }
@@ -197,7 +221,8 @@ nav a:hover {
 }
 @media screen and (min-width: 1024px) {
   .container,
-.main-container {
+.main-container,
+footer {
     width: 960px;
   }
 }
