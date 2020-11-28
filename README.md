@@ -8,13 +8,16 @@ This is a pretty basic version. Would definitely create another tetris game with
 
 You can play the game [HERE](https://ealmario.github.io/vanilla-tetris/)
 
-######Controls:
+###### Controls:
 
 Down - Spacebar
+<br>
 Left - Arrow Left or A
+<br>
 Right - Arrow Right or D
-
+<br>
 Rotate Left - J
+<br>
 Rotate Right - L
 
 ## Screenshot
